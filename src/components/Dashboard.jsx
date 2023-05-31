@@ -6,51 +6,66 @@ import {
   CloseOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import data from "../data.js";
+
+import data from "../data.js"; // importing the dummy data from data.js
 
 const Dashboard = () => {
+  // useForm hook from antd to create a form instance
   const [form] = Form.useForm();
+
+  // useState hook to store the dataSource, editingKey and searchText
   const [dataSource, setDataSource] = useState(data);
   const [editingKey, setEditingKey] = useState("");
   const [searchText, setSearchText] = useState("");
 
+  // isEditing function to check if the record is being edited
   const isEditing = (record) => record.key === editingKey;
 
+  // edit function to set the editingKey to the record key
   const edit = (record) => {
     form.setFieldsValue({ ...record });
     setEditingKey(record.key);
   };
 
+  // cancel function to set the editingKey to an empty string
   const cancel = () => {
     setEditingKey("");
   };
 
+  // save function to save the record
   const save = async (key) => {
+    // try catch block to validate the form
     try {
-      const row = await form.validateFields();
-      const newData = [...dataSource];
-      const index = newData.findIndex((item) => key === item.key);
+      const row = await form.validateFields(); // validate the form
+      const newData = [...dataSource]; // create a new array with the dataSource
+      const index = newData.findIndex((item) => key === item.key); // find the index of the record
 
+      // if the index is greater than -1, update the record
       if (index > -1) {
-        const item = newData[index];
-        const updatedItem = { ...item, ...row };
-        newData.splice(index, 1, updatedItem);
-        setDataSource(newData);
-        setEditingKey("");
+        const item = newData[index]; // get the record
+        const updatedItem = { ...item, ...row }; // update the record with the form values
+        newData.splice(index, 1, updatedItem); // replace the record with the updated record
+
+        setDataSource(newData); // set the dataSource to the new array
+        setEditingKey(""); // set the editingKey to an empty string
       }
     } catch (errInfo) {
+      // if the form validation fails, log the error
       console.log("Validate Failed:", errInfo);
     }
   };
 
+  // handleSearch function to set the searchText
   const handleSearch = (value) => {
     setSearchText(value);
   };
 
+  // filteredDataSource to filter the dataSource based on the searchText
   const filteredDataSource = dataSource.filter((item) =>
     item.name.toLowerCase().includes(searchText.toLowerCase())
   );
 
+  // columns array to render the columns in the table
   const columns = [
     {
       dataIndex: "logo",
@@ -67,6 +82,7 @@ const Dashboard = () => {
       ),
       dataIndex: "name",
       editable: true,
+
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
@@ -91,6 +107,7 @@ const Dashboard = () => {
       title: "Active Orders",
       dataIndex: "active_orders",
       editable: true,
+
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
@@ -111,6 +128,7 @@ const Dashboard = () => {
       title: "Amount",
       dataIndex: "quantity",
       editable: true,
+
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
@@ -130,12 +148,14 @@ const Dashboard = () => {
     {
       title: "Placed On",
       dataIndex: "placed_on",
+
       sorter: (a, b) => new Date(a.placed_on) - new Date(b.placed_on),
     },
     {
       title: "Status",
       dataIndex: "status",
       defaultSortOrder: "descend",
+
       filters: [
         { text: "Confirmed", value: "Confirmed" },
         { text: "Delivered", value: "Delivered" },
@@ -148,6 +168,7 @@ const Dashboard = () => {
     {
       title: "Options",
       dataIndex: "options",
+
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
@@ -178,6 +199,7 @@ const Dashboard = () => {
 
   return (
     <>
+      // Content is added here
       <Form form={form} component={false}>
         <Table
           dataSource={filteredDataSource}
