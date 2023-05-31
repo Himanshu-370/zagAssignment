@@ -199,7 +199,6 @@ const Dashboard = () => {
 
   return (
     <>
-      // Content is added here
       <Form form={form} component={false}>
         <Table
           dataSource={filteredDataSource}

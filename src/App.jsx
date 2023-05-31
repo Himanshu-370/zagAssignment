@@ -21,9 +21,7 @@ const App = () => {
 
   return (
     <React.Fragment>
-      // Using the Layout components from antd
       <Layout>
-        // Sider is added here
         <Sider
           breakpoint="lg"
           collapsedWidth="0"
@@ -34,11 +32,9 @@ const App = () => {
             console.log(collapsed, type);
           }}
         >
-          // Logo is added here
           <div className="demo-logo-vertical">
             <img src={Logo} alt="" />
           </div>
-          // Menu is added here
           <Menu
             theme="light"
             mode="inline"
@@ -63,7 +59,6 @@ const App = () => {
           />
         </Sider>
         <Layout>
-          // Header is added here
           <Header
             style={{
               padding: 0,
@@ -72,7 +67,6 @@ const App = () => {
           >
             <Heading />
           </Header>
-          // Content that is the Dashboard is added here
           <Content
             style={{
               margin: "24px 16px 0",
