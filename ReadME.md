@@ -37,4 +37,4 @@ To run this application on your local machine, follow these steps:
    
    ```bash
    npm run dev
-   ```
+   ``` 
