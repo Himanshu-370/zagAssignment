@@ -3,9 +3,9 @@ import { Layout, Menu, theme } from "antd";
 import "./App.css";
 
 import Logo from "./assets/logo.svg";
-import sidebar1 from "./assets/s1.svg";
-// import sidebar2 from "./assets/s2.svg";
-import sidebar3 from "./assets/s3.svg";
+import reports from "./assets/reports.svg";
+import workspaces from "./assets/workspaces.svg";
+import settings from "./assets/settings.svg";
 
 import Heading from "./components/Heading";
 import Dashboard from "./components/Dashboard";
@@ -33,7 +33,7 @@ const App = () => {
           }}
         >
           <div className="demo-logo-vertical">
-            <img src={Logo} alt="" />
+            <img src={Logo} width={73} height="auto" alt="logo" />
           </div>
           <Menu
             theme="light"
@@ -42,17 +42,28 @@ const App = () => {
             items={[
               {
                 key: "1",
-                icon: <img src={sidebar1} />,
+                icon: (
+                  <img src={reports} width={20} height="auto" alt="reports" />
+                ),
                 label: "Reports",
               },
               {
                 key: "2",
-                icon: <img src={sidebar1} />,
+                icon: (
+                  <img
+                    src={workspaces}
+                    width={20}
+                    height="auto"
+                    alt="workspaces"
+                  />
+                ),
                 label: "Workspaces",
               },
               {
                 key: "3",
-                icon: <img src={sidebar3} />,
+                icon: (
+                  <img src={settings} width={20} height="auto" alt="settings" />
+                ),
                 label: "Settings",
               },
             ]}

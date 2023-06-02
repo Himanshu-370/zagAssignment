@@ -9,6 +9,8 @@ import {
 
 import data from "../data.js"; // importing the dummy data from data.js
 
+import subtract from "../assets/subtract.svg";
+
 const Dashboard = () => {
   // useForm hook from antd to create a form instance
   const [form] = Form.useForm();
@@ -69,7 +71,7 @@ const Dashboard = () => {
   const columns = [
     {
       dataIndex: "logo",
-      render: (logo) => <img src={logo} alt="Logo" style={{ width: "70px" }} />,
+      render: (logo) => <img src={logo} width={70} height="auto" alt="Logo" />,
     },
     {
       title: (
@@ -154,7 +156,6 @@ const Dashboard = () => {
     {
       title: "Status",
       dataIndex: "status",
-      defaultSortOrder: "descend",
 
       filters: [
         { text: "Confirmed", value: "Confirmed" },
@@ -200,6 +201,15 @@ const Dashboard = () => {
   return (
     <>
       <Form form={form} component={false}>
+        <div className="confirm-head">
+          <div className="content">
+            <h3>Confirmed</h3>
+            <p>258</p>
+          </div>
+          <button>
+            <img src={subtract} width={36} height="auto" alt="minimize" />
+          </button>
+        </div>
         <Table
           dataSource={filteredDataSource}
           columns={columns}
